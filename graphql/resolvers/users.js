@@ -19,13 +19,16 @@ module.exports = {
                 createdAt: new Date().toISOString()
             });
             
-            const res = await newUser.save(); // dave the user to the database
+            const res = await newUser.save(); // save the user to the database
 
+            // create new token for the user that takes a payload
+
+            // token to be sent to server i.e. encoded
             const token = jwt.sign({    // save the user to the database
                 id: res.id,
                 email: res.email,
                 username: res.username
-            }, SECRET_KEY, { expiresIn: '1h'});
+            }, SECRET_KEY, { expiresIn: '1h'}); // defining the expirationtime
 
             return {
                 ...res._doc,
